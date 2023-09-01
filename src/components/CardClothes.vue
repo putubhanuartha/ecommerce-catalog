@@ -1,32 +1,40 @@
 <script>
 export default {
-	props: ["objState"],
+	props: ["objState", "data"],
 };
 </script>
 <template>
 	<div class="container_women">
 		<div class="content_container">
 			<img
-				src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-				alt=""
+				:src="data.image"
+				:alt="data.category"
 			/>
 			<div class="right_container">
 				<div class="top_content">
 					<h2 class="title">
-						Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops
+						{{ data.title }}
 					</h2>
 					<div class="category_rating_container">
-						<p class="category">men's clothing</p>
+						<p class="category">{{ data.category }}</p>
 						<div class="rating_container">
-							<p>3.6/5</p>
+							<p>{{ data.rating.rate }}</p>
 							<div class="bullet_container">
 								<img
-									v-for="n in 5"
-									v-bind:src="objState.id === 0 ? '/src/assets/woman_assets/bullet.svg' : '/src/assets/men_assets/bullet.svg'"
+									v-for="n in Math.floor(data.rating.rate)"
+									v-bind:src="
+										objState.id === 0
+											? '/src/assets/woman_assets/bullet.svg'
+											: '/src/assets/men_assets/bullet.svg'
+									"
 								/>
 								<img
-									v-for="n in 0"
-									v-bind:src="objState.id === 0 ? '/src/assets/woman_assets/bullet-void.svg' : '/src/assets/men_assets/bullet-void.svg'"
+									v-for="n in 5 - Math.floor(data.rating.rate)"
+									v-bind:src="
+										objState.id === 0
+											? '/src/assets/woman_assets/bullet-void.svg'
+											: '/src/assets/men_assets/bullet-void.svg'
+									"
 								/>
 							</div>
 						</div>
@@ -37,8 +45,7 @@ export default {
 						alt=""
 					/>
 					<p class="text">
-						Your perfect pack for everyday use and walks in the forest. Stash
-						your laptop (up to 15 inches) in the padded sleeve, your everyday
+						{{ data.description }}
 					</p>
 				</div>
 				<div class="bottom_content">
@@ -47,10 +54,10 @@ export default {
 						class="line"
 						alt=""
 					/>
-					<h5 class="price">$12.59</h5>
+					<h5 class="price">${{ data.price }}</h5>
 					<div class="button_container">
 						<button>Buy Now</button>
-						<button>Next Product</button>
+						<button @click="$emit('handleIncrement')">Next Product</button>
 					</div>
 				</div>
 			</div>
@@ -105,6 +112,8 @@ p.text {
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
+	max-height: 10rem;
+	overflow-y: scroll;
 }
 .content_container {
 	display: flex;
@@ -112,7 +121,7 @@ p.text {
 	gap: 1.7rem;
 }
 h5.price {
-	color:  v-bind("objState.color");
+	color: v-bind("objState.color");
 	font-family: Inter;
 	font-size: 1.75rem;
 	font-style: normal;
@@ -170,6 +179,10 @@ img.line {
 	font-weight: 600;
 	line-height: normal;
 	flex: 1;
+	transition: all 0.2s;
+}
+.button_container button:nth-child(1):hover{
+	border-radius: 20px;
 }
 
 .button_container button:nth-child(2) {
@@ -183,5 +196,10 @@ img.line {
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
+	transition: all 0.2s;
+}
+.button_container button:nth-child(2):hover {
+	background: v-bind("objState.color");
+	color: #fff;
 }
 </style>

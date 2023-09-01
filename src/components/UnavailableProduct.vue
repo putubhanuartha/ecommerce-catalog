@@ -6,7 +6,7 @@
 		/>
 		<div class="text_container">
 			<p>This product is unavailable to show</p>
-			<button>Next Product</button>
+			<button @click="$emit('handleIncrement')">Next Product</button>
 		</div>
 	</div>
 </template>
@@ -51,7 +51,7 @@
 	background: #fff;
 	transition: all 0.2s;
 }
-.container_unavail .text_container button:hover{
+.container_unavail .text_container button:hover {
 	background: #000;
 	color: #fff;
 }
