@@ -10,7 +10,7 @@ export default {
 	<div class="container">
 		<div class="pattern_container">
 			<img
-				src="../public/background/bg-pattern-woman.svg"
+				src="/background/bg-pattern-woman.svg"
 				alt="background-pattern-woman"
 			/>
 		</div>
