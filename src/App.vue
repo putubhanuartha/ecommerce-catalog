@@ -1,8 +1,28 @@
 <script>
-import WomenClothes from "./components/WomenClothes.vue";
-import MenClothes from "./components/MenClothes.vue";
+import CardClothes from "./components/CardClothes.vue";
+import UnavailableProduct from "./components/UnavailableProduct.vue";
+const statusState = {
+	womanSection: {
+		id: 0,
+		color: "#720060",
+		backgroundColor : "#FDE2FF"
+	},
+	menSection: {
+		id: 1,
+		color: "#002772",
+		backgroundColor : "#D6E6FF"
+	},
+	unavail: {
+		id: 2,
+	},
+};
 export default {
-	components: { WomenClothes, MenClothes },
+	components: { CardClothes, UnavailableProduct },
+	data() {
+		return {
+			state: statusState.unavail,
+		};
+	},
 };
 </script>
 
@@ -12,9 +32,11 @@ export default {
 			<img
 				src="/background/bg-pattern-woman.svg"
 				alt="background-pattern-woman"
+				v-if="state.id !== 2"
 			/>
 		</div>
-		<WomenClothes />
+		<CardClothes :objState="state"  v-if="state.id === 0 || state.id === 1" />
+		<UnavailableProduct v-else />
 	</div>
 </template>
 
@@ -26,7 +48,7 @@ export default {
 }
 .container .pattern_container {
 	height: 60vh;
-	background-color: #fde2ff;
+	background-color: v-bind("state.id === 2 ? '#D8D7D7' : state.backgroundColor ");
 	position: fixed;
 	top: 0;
 	right: 0;

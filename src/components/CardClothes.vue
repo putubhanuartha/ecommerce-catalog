@@ -1,3 +1,8 @@
+<script>
+export default {
+	props: ["objState"],
+};
+</script>
 <template>
 	<div class="container_women">
 		<div class="content_container">
@@ -16,24 +21,12 @@
 							<p>3.6/5</p>
 							<div class="bullet_container">
 								<img
-									src="../assets/bullet.svg"
-									alt=""
+									v-for="n in 5"
+									v-bind:src="objState.id === 0 ? '/src/assets/woman_assets/bullet.svg' : '/src/assets/men_assets/bullet.svg'"
 								/>
 								<img
-									src="../assets/bullet.svg"
-									alt=""
-								/>
-								<img
-									src="../assets/bullet.svg"
-									alt=""
-								/>
-								<img
-									src="../assets/bullet-void.svg"
-									alt=""
-								/>
-								<img
-									src="../assets/bullet-void.svg"
-									alt=""
+									v-for="n in 0"
+									v-bind:src="objState.id === 0 ? '/src/assets/woman_assets/bullet-void.svg' : '/src/assets/men_assets/bullet-void.svg'"
 								/>
 							</div>
 						</div>
@@ -89,7 +82,7 @@
 	align-items: center;
 }
 h2.title {
-	color: #720060;
+	color: v-bind("objState.color");
 	font-family: Inter;
 	font-size: 1.75rem;
 	font-style: normal;
@@ -119,7 +112,7 @@ p.text {
 	gap: 1.7rem;
 }
 h5.price {
-	color: #720060;
+	color:  v-bind("objState.color");
 	font-family: Inter;
 	font-size: 1.75rem;
 	font-style: normal;
@@ -169,7 +162,7 @@ img.line {
 }
 .button_container button:nth-child(1) {
 	border-radius: 0.25rem;
-	background: #720060;
+	background: v-bind("objState.color");
 	color: #fff;
 	font-family: Inter;
 	font-size: 1.25rem;
@@ -178,22 +171,17 @@ img.line {
 	line-height: normal;
 	flex: 1;
 }
-.button_container button:nth-child(1):hover {
-	background-color: #a8008f;
-}
+
 .button_container button:nth-child(2) {
 	flex: 1;
 	border-radius: 0.25rem;
-	border: 3px solid #720060;
+	border: 3px solid v-bind("objState.color");
 	background: #fff;
-	color: #720060;
+	color: v-bind("objState.color");
 	font-family: Inter;
 	font-size: 1.25rem;
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
-}
-.button_container button:nth-child(2):hover {
-	background: #ffebeb;
 }
 </style>
